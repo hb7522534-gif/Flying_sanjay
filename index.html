@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>FLYING SANJAY</title>
+  
+  <!-- Fonts faithful to reference arcade design -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=2.1">
+</head>
+<body>
+
+  <div id="game-container">
+    <!-- Arcade Canvas Viewport -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Top HUD -->
+    <div class="hud">
+      <div id="hud-score-panel" class="score-panel" style="display: none;">
+        <span class="score-title">SCORE</span>
+        <div id="score-display" class="score-badge">0</div>
+      </div>
+      <button id="sound-toggle" class="sound-btn" title="Toggle Sound">🔊</button>
+    </div>
+
+    <!-- Start Overlay (Redesigned Funny Cartoon Arcade Style) -->
+    <div id="start-overlay">
+      <div class="comic-stars s-tl">⭐</div>
+      <div class="comic-stars s-tr">✨</div>
+      <div class="comic-stars s-ml">✨</div>
+      <div class="comic-stars s-mr">⭐</div>
+
+      <!-- Playful Comic Title -->
+      <div class="title-wrapper">
+        <span class="title-cloud-l">☁️</span>
+        <h1 class="title-banner">FLYING SANJAY</h1>
+        <span class="title-cloud-r">☁️</span>
+      </div>
+
+      <!-- Welcoming Character Stage -->
+      <div class="character-stage welcoming">
+        <div class="comic-breeze-lines">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="speech-bubble">READY TO FLY! 🚀</div>
+
+        <div class="cartoon-bird-wrap">
+          <svg class="bird-svg-body" viewBox="0 0 160 140" width="160" height="140">
+            <!-- Tail Feathers -->
+            <path d="M 45 65 L 12 50 L 26 72 L 10 88 L 48 85 Z" fill="#ef4444" stroke="#0f172a" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M 43 68 L 22 58 L 30 73 L 18 83 L 46 80 Z" fill="#f97316"/>
+            <!-- Bird Feet -->
+            <path d="M 68 108 L 64 122 M 64 122 L 56 124 M 64 122 L 72 124" stroke="#ea580c" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 88 108 L 86 122 M 86 122 L 78 124 M 86 122 L 94 124" stroke="#ea580c" stroke-width="4" stroke-linecap="round"/>
+            <!-- Chubby Body -->
+            <ellipse cx="78" cy="80" rx="46" ry="34" fill="#facc15" stroke="#0f172a" stroke-width="3.8"/>
+            <ellipse cx="88" cy="86" rx="28" ry="18" fill="#fef08a"/>
+            <!-- Animated Wing -->
+            <g class="animated-wing">
+              <path d="M 70 70 C 40 60, 36 90, 68 86 C 82 84, 88 74, 70 70 Z" fill="#facc15" stroke="#0f172a" stroke-width="3.5"/>
+              <ellipse cx="50" cy="74" rx="12" ry="7" fill="#ef4444" transform="rotate(-15 50 74)"/>
+              <ellipse cx="58" cy="80" rx="10" ry="5" fill="#f97316" transform="rotate(-10 58 80)"/>
+            </g>
+          </svg>
+
+          <!-- Real Sanjay Face Attached to Head -->
+          <div class="sanjay-face-avatar">
+            <img src="assets/sanjay-face.png" alt="Flying Sanjay">
+          </div>
+        </div>
+      </div>
+
+      <!-- Best Score Badge (if available) -->
+      <div id="start-best-badge" class="start-best-card" style="display: none;">
+        <span class="best-star">★</span>
+        <span>BEST SCORE: <b id="start-best-val">0</b></span>
+        <span class="best-star">★</span>
+      </div>
+
+      <!-- Large Colorful PLAY Button with Bounce -->
+      <button id="btn-play" class="btn-cartoon-play" title="Play Game">
+        <span class="play-shine"></span>
+        <span class="play-icon">▶</span>
+        <span class="play-text">PLAY NOW!</span>
+      </button>
+
+      <!-- Short Instruction -->
+      <div class="comic-tap-hint">
+        <span>👆 TAP TO FLY!</span>
+      </div>
+
+      <div class="comic-device-sub">
+        📱 Tap screen &nbsp;|&nbsp; 💻 Spacebar or Click
+      </div>
+    </div>
+
+    <!-- Game Over Pop-up Modal (Redesigned Comic Arcade Style) -->
+    <div id="fail-modal">
+      <div class="fail-card cartoon-fail-card">
+        <div class="comic-fail-title">GAME OVER</div>
+        <div class="fail-sub">“సంజయ్ నా మొడ్డ గూడు!”</div>
+
+        <!-- Dizzy / Shocked Character Stage -->
+        <div class="character-stage dizzy">
+          <!-- Spinning Dizzy Stars & Halo Orbit -->
+          <div class="dizzy-orbit">
+            <span class="dizzy-star s1">💫</span>
+            <span class="dizzy-star s2">⭐</span>
+            <span class="dizzy-star s3">💥</span>
+            <span class="dizzy-star s4">✨</span>
+          </div>
+
+          <div class="dizzy-speech-bubble">OUCH! 😵</div>
+          <div class="comic-dust-cloud">💨</div>
+
+          <div class="cartoon-bird-wrap dizzy-bird">
+            <svg class="bird-svg-body" viewBox="0 0 160 140" width="160" height="140">
+              <!-- Tail Feathers -->
+              <path d="M 45 75 L 12 70 L 22 88 L 10 102 L 46 95 Z" fill="#ef4444" stroke="#0f172a" stroke-width="3.5" stroke-linejoin="round"/>
+              <path d="M 43 78 L 22 75 L 28 88 L 18 97 L 44 92 Z" fill="#f97316"/>
+              <!-- Knocked-out Bird Feet -->
+              <path d="M 68 108 L 64 116 M 64 116 L 58 114 M 64 116 L 70 114" stroke="#ea580c" stroke-width="4" stroke-linecap="round"/>
+              <path d="M 88 108 L 86 116 M 86 116 L 80 114 M 86 116 L 92 114" stroke="#ea580c" stroke-width="4" stroke-linecap="round"/>
+              <!-- Chubby Body -->
+              <ellipse cx="78" cy="80" rx="46" ry="34" fill="#facc15" stroke="#0f172a" stroke-width="3.8"/>
+              <ellipse cx="88" cy="86" rx="28" ry="18" fill="#fef08a"/>
+              <!-- Drooping Wing -->
+              <g class="droop-wing">
+                <path d="M 70 76 C 42 72, 38 104, 68 98 C 82 94, 86 82, 70 76 Z" fill="#facc15" stroke="#0f172a" stroke-width="3.5"/>
+                <ellipse cx="50" cy="86" rx="12" ry="7" fill="#ef4444" transform="rotate(10 50 86)"/>
+                <ellipse cx="58" cy="92" rx="10" ry="5" fill="#f97316" transform="rotate(15 58 92)"/>
+              </g>
+            </svg>
+
+            <!-- Real Sanjay Face Attached to Head -->
+            <div class="sanjay-face-avatar">
+              <img src="assets/sanjay-face.png" alt="Sanjay Face">
+            </div>
+          </div>
+        </div>
+
+        <!-- Scores Row -->
+        <div class="scores-row comic-scores-card">
+          <div class="score-col">
+            <span class="score-label">SCORE</span>
+            <span id="final-score" class="score-val">0</span>
+          </div>
+          <div class="score-divider"></div>
+          <div class="score-col">
+            <span class="score-label">BEST</span>
+            <span id="high-score" class="score-val">0</span>
+            <span id="new-record-badge" class="new-badge">NEW RECORD!</span>
+          </div>
+        </div>
+
+        <!-- Large Colorful TRY AGAIN Button -->
+        <button id="btn-retry" class="btn-restart btn-cartoon-tryagain" title="Try Again">
+          <span class="retry-icon">🔄</span>
+          <span>TRY AGAIN!</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Scripts -->
+  <script type="module" src="js/main.js?v=2.1"></script>
+</body>
+</html>
